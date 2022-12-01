@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      html,
+      body {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .video_background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
+      }
+
+      .video_background video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .video_background::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        z-index: 100;
+        height: 100vh;
+        width: 100vw;
+
+        -webkit-mask: radial-gradient(
+          circle,
+          rgba(241, 250, 254, 0) 70%,
+          rgba(255, 255, 255, 1) 100%
+        );
+        backdrop-filter: blur(10px);
+        z-index: 2;
+      }
+
+      .content_wrapepr {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+
+        z-index: 3;
+      }
+
+      .content {
+        max-width: 80%;
+        margin: 0 auto;
+
+        font-size: 48px;
+        color: #ffffff;
+      }
+
+      .voice_control {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 4;
+      }
+
+      #audio_control {
+        background-color: #4caf50;
+        border: 1px solid transparent;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        transition: 0.2s ease;
+      }
+
+      #audio_control:hover {
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content_wrapepr">
+      <div class="content">
+        content goes here Lorem ipsum dolor sit, amet consectetur adipisicing
+        elit. Asperiores vitae dolore doloremque porro libero. Non blanditiis
+        quae recusandae distinctio aliquid neque saepe tempora placeat!
+        Laboriosam ducimus molestiae ullam possimus dignissimos iure animi eaque
+        expedita nisi, fugiat, voluptatum fuga hic a assumenda quasi quod. Id
+        libero, facere quam non a voluptatum.
+      </div>
+    </div>
+
+    <div class="voice_control">
+      <button id="audio_control">unmute</button>
+    </div>
+
+    <div class="video_background">
+      <video id="bg_video" loop autoplay="autoplay" muted>
+        <!-- <source src="/parlament.mp4" type="video/mp4" /> -->
+        <source src="/parlament_small.mp4" type="video/mp4" />
+        <!-- <source src="movie.ogg" type="video/ogg"> -->
+      </video>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function (event) {
+        const voice_btn = document.getElementById("audio_control");
+        voice_btn.addEventListener("click", (event) => {
+          let bg_video = document.getElementById("bg_video");
+          if (bg_video.muted === true) {
+            bg_video.muted = false;
+            voice_btn.textContent = "mute";
+          } else {
+            bg_video.muted = true;
+            voice_btn.textContent = "unmute";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
