@@ -4,17 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Young Diplomats of Georgia</title>
 
     <style>
       html,
       body {
         box-sizing: border-box;
         width: 100%;
-        height: 100vh;
+        height: 100%;
+        max-height: 100vh;
         margin: 0;
         padding: 0;
-        overflow: hidden;
+        font-family: sans-serif;
       }
 
       .video_background {
@@ -43,13 +44,7 @@
         z-index: 100;
         height: 100vh;
         width: 100vw;
-
-        -webkit-mask: radial-gradient(
-          circle,
-          rgba(241, 250, 254, 0) 70%,
-          rgba(255, 255, 255, 1) 100%
-        );
-        backdrop-filter: blur(10px);
+        background-color: rgba(0, 0, 0, 0.6);
         z-index: 2;
       }
 
@@ -60,16 +55,38 @@
         align-items: center;
         width: 100%;
         height: 100%;
-
         z-index: 3;
+        overflow: hidden;
       }
 
-      .content {
-        max-width: 80%;
+      .content{
+        max-width: 90%;
         margin: 0 auto;
-
         font-size: 48px;
-        color: #ffffff;
+        color: #fff;
+        user-select: none;
+      }
+
+      a{
+        margin: 0 auto;
+        font-size: 24px;
+        color: #fff;
+        text-decoration: none;
+        text-align: center;
+      }
+
+      @media(min-width: 768px) {
+        .content{
+          max-width: 80%;
+        }
+        .content a {
+          font-size: 44px;
+        }
+      }
+
+      span{
+        display: inline-block;
+        width: 100%;
       }
 
       .voice_control {
@@ -80,40 +97,45 @@
       }
 
       #audio_control {
-        background-color: #4caf50;
-        border: 1px solid transparent;
-        color: white;
-        padding: 16px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 48px;
+        height: 48px;
+        color: #000;
+        background-color: #fff;
+        border-radius: 100%;
+        border: 0;
         font-size: 16px;
-        transition: 0.2s ease;
+        cursor: pointer;
+        transition: opacity 0.2s;
       }
 
       #audio_control:hover {
-        border: 1px solid #000;
+        opacity: 0.75;
       }
     </style>
   </head>
   <body>
     <div class="content_wrapepr">
       <div class="content">
-        content goes here Lorem ipsum dolor sit, amet consectetur adipisicing
-        elit. Asperiores vitae dolore doloremque porro libero. Non blanditiis
-        quae recusandae distinctio aliquid neque saepe tempora placeat!
-        Laboriosam ducimus molestiae ullam possimus dignissimos iure animi eaque
-        expedita nisi, fugiat, voluptatum fuga hic a assumenda quasi quod. Id
-        libero, facere quam non a voluptatum.
+        <a href="https://www.facebook.com/youngdiplomatsofgeorgia" title="Young Diplomats of Georgia" target="_blanck">
+        <span>საქართველოს ახალგაზრდა დიპლომატები</span>
+        <br/>
+        <span>Young Diplomats of Georgia</span>
+      </a>
       </div>
     </div>
 
     <div class="voice_control">
-      <button id="audio_control">unmute</button>
+      <button id="audio_control">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume-x"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+      </button>
     </div>
 
     <div class="video_background">
-      <video id="bg_video" loop autoplay="autoplay" muted>
+      <video id="bg_video" loop autoplay muted playsinline>
         <!-- <source src="/parlament.mp4" type="video/mp4" /> -->
         <source src="/parlament_small.mp4" type="video/mp4" />
         <!-- <source src="movie.ogg" type="video/ogg"> -->
@@ -127,10 +149,10 @@
           let bg_video = document.getElementById("bg_video");
           if (bg_video.muted === true) {
             bg_video.muted = false;
-            voice_btn.textContent = "mute";
+            voice_btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume-2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
           } else {
             bg_video.muted = true;
-            voice_btn.textContent = "unmute";
+            voice_btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume-x"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>`;
           }
         });
       });
